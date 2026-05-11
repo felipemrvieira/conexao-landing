@@ -12,6 +12,7 @@ const sectionIds = navItems.map((item) => item.href.replace("#", ""));
 export function SiteHeader() {
   const [activeSection, setActiveSection] = useState(sectionIds[0]);
   const [isFloating, setIsFloating] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     function updateHeaderState() {
@@ -98,16 +99,49 @@ export function SiteHeader() {
           Agende uma visita
         </a>
 
-        <a
+        <button
           className={styles.menuButton}
+          type="button"
+          aria-expanded={isMenuOpen}
+          aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+          onClick={() => setIsMenuOpen((current) => !current)}
+        >
+          <Icon name="menu" />
+        </button>
+      </div>
+
+      <nav
+        className={`${styles.mobileMenu} ${
+          isMenuOpen ? styles.mobileMenuOpen : ""
+        }`}
+        aria-label="Navegação mobile"
+      >
+        {navItems.map((item) => {
+          const sectionId = item.href.replace("#", "");
+          const isActive = activeSection === sectionId;
+
+          return (
+            <a
+              aria-current={isActive ? "page" : undefined}
+              className={isActive ? styles.navLinkActive : undefined}
+              href={item.href}
+              key={item.href}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.label}
+            </a>
+          );
+        })}
+        <a
+          className={styles.mobileMenuCta}
           href={WHATSAPP_URL}
           rel="noreferrer"
           target="_blank"
-          aria-label="Agendar visita pelo WhatsApp"
+          onClick={() => setIsMenuOpen(false)}
         >
-          <Icon name="menu" />
+          Agende uma visita
         </a>
-      </div>
+      </nav>
     </header>
   );
 }

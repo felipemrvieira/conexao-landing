@@ -151,7 +151,14 @@
 
 .menuButton {
   display: none;
+  border: 0;
+  background: transparent;
   color: var(--color-primary);
+  cursor: pointer;
+}
+
+.mobileMenu {
+  display: none;
 }
 
 .hero {
@@ -1088,6 +1095,52 @@
   .menuButton {
     display: inline-grid;
     place-items: center;
+  }
+
+  .mobileMenu {
+    position: absolute;
+    right: var(--space-margin-mobile);
+    left: var(--space-margin-mobile);
+    top: calc(100% + 8px);
+    display: grid;
+    gap: 4px;
+    border: 1px solid color-mix(in srgb, var(--color-primary) 12%, transparent);
+    border-radius: 28px;
+    padding: 12px;
+    background: color-mix(in srgb, var(--color-surface) 96%, transparent);
+    box-shadow: 0 18px 46px rgba(75, 44, 118, 0.16);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
+  }
+
+  .mobileMenuOpen {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .mobileMenu a {
+    border-radius: 18px;
+    padding: 14px 16px;
+    color: var(--color-on-surface-variant);
+    font-weight: 800;
+  }
+
+  .mobileMenu .navLinkActive {
+    border-bottom: 0;
+    color: var(--color-primary);
+    background: var(--color-primary-fixed);
+  }
+
+  .mobileMenuCta {
+    margin-top: 6px;
+    color: var(--color-on-primary) !important;
+    background: var(--color-primary);
+    text-align: center;
   }
 
   .hero {
