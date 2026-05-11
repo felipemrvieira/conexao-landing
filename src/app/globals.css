@@ -112,3 +112,7 @@ img {
   display: block;
   max-width: 100%;
 }
+
+section[id] {
+  scroll-margin-top: 112px;
+}

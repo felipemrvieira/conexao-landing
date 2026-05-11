@@ -8,12 +8,22 @@
 }
 
 .topbar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  right: 0;
+  left: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--color-surface) 90%, transparent);
-  box-shadow: var(--shadow-soft);
+  padding: 0;
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
   backdrop-filter: blur(18px);
+  transition:
+    padding 200ms ease,
+    background-color 200ms ease;
+}
+
+.topbarFloating {
+  padding: 12px 0;
+  background: transparent;
 }
 
 .navShell {
@@ -22,6 +32,23 @@
   justify-content: space-between;
   min-height: 80px;
   gap: 24px;
+  border: 1px solid transparent;
+  transition:
+    min-height 200ms ease,
+    border-color 200ms ease,
+    border-radius 200ms ease,
+    box-shadow 200ms ease,
+    background-color 200ms ease,
+    padding 200ms ease;
+}
+
+.topbarFloating .navShell {
+  min-height: 68px;
+  border-color: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  border-radius: var(--radius-full);
+  padding: 0 18px;
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+  box-shadow: 0 18px 46px rgba(75, 44, 118, 0.14);
 }
 
 .logo,
@@ -59,7 +86,7 @@
   line-height: var(--line-height-label-md);
 }
 
-.navLinks a:first-child {
+.navLinkActive {
   color: var(--color-primary);
   border-bottom: 2px solid var(--color-secondary);
 }
@@ -360,7 +387,7 @@
 }
 
 .highlightCard:hover,
-.spaceCard:hover {
+.spaceItem:hover {
   transform: translateY(-4px);
 }
 
@@ -602,6 +629,55 @@
   background: var(--color-secondary);
 }
 
+.storeButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.storeButtons a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 176px;
+  border: 1px solid color-mix(in srgb, var(--color-on-primary) 14%, transparent);
+  border-radius: 18px;
+  padding: 12px 16px;
+  color: var(--color-on-primary);
+  background: color-mix(in srgb, var(--color-on-primary) 10%, transparent);
+  box-shadow: 0 14px 32px rgba(29, 27, 32, 0.12);
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.storeButtons a:hover {
+  border-color: color-mix(in srgb, var(--color-secondary-container) 52%, transparent);
+  background: color-mix(in srgb, var(--color-on-primary) 16%, transparent);
+  transform: translateY(-2px);
+}
+
+.storeButtons svg {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+}
+
+.storeButtons span {
+  display: grid;
+  gap: 1px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.storeButtons small {
+  color: var(--color-primary-fixed-dim);
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
 .sectionIntro {
   display: grid;
   justify-items: center;
@@ -650,8 +726,7 @@
 
 .bentoGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: minmax(250px, auto);
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 
@@ -659,27 +734,98 @@
   position: relative;
   overflow: hidden;
   display: grid;
-  align-content: start;
-  gap: 12px;
+  justify-items: center;
+  min-height: 430px;
   border-radius: var(--radius-xl);
-  padding: 32px;
-  box-shadow: var(--shadow-soft);
+  padding: 152px 26px 38px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-floating);
 }
 
 .bentoWide {
-  grid-column: span 2;
+  grid-column: auto;
+}
+
+.bentoCopy {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
 }
 
 .bentoCard h3 {
+  max-width: 220px;
   color: var(--color-primary);
 }
 
-.bentoCard > span {
+.bentoCard p {
+  max-width: 240px;
+}
+
+.bentoTop {
   position: absolute;
-  right: -20px;
-  bottom: -24px;
-  color: color-mix(in srgb, var(--color-primary) 22%, transparent);
-  font-size: 120px;
+  inset: 0 0 auto;
+  height: 176px;
+  background: var(--color-primary-fixed-dim);
+}
+
+.bentoTop::before,
+.bentoTop::after {
+  position: absolute;
+  content: "";
+  bottom: -34px;
+  width: 58%;
+  height: 86px;
+  border-radius: 0 0 999px 999px;
+  background: color-mix(in srgb, var(--color-primary) 38%, transparent);
+}
+
+.bentoTop::before {
+  left: -5%;
+  transform: rotate(16deg);
+}
+
+.bentoTop::after {
+  right: -4%;
+  background: inherit;
+  transform: rotate(-12deg);
+}
+
+.bentoImage {
+  position: relative;
+  z-index: 3;
+  width: 168px;
+  height: 168px;
+  margin-bottom: 22px;
+  margin-top: -98px;
+  overflow: hidden;
+  border: 8px solid var(--color-surface);
+  border-radius: var(--radius-full);
+  box-shadow:
+    0 0 0 8px color-mix(in srgb, var(--color-primary) 18%, transparent),
+    0 16px 34px rgba(75, 44, 118, 0.18);
+}
+
+.bentoImage img {
+  object-fit: cover;
+}
+
+.tonepurple .bentoTop {
+  background: var(--color-primary-fixed-dim);
+}
+
+.toneteal .bentoTop {
+  background: var(--color-secondary-fixed-dim);
+}
+
+.toneyellow .bentoTop {
+  background: var(--color-tertiary-fixed);
+}
+
+.tonepeach .bentoTop {
+  background: var(--color-pastel-peach);
 }
 
 .spaceGrid,
@@ -687,6 +833,13 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+}
+
+.spaceItem {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+  transition: transform 260ms ease;
 }
 
 .spaceCard {
@@ -713,14 +866,14 @@
   transform: scale(1.08);
 }
 
-.spaceCard strong {
-  position: absolute;
-  inset: auto 0 0;
-  padding: 42px 28px 28px;
-  color: var(--color-on-primary);
-  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--color-primary) 88%, transparent));
+.spaceItem strong {
+  display: block;
+  padding: 0 12px;
+  color: var(--color-primary);
   font-family: var(--font-display), sans-serif;
   font-size: var(--font-size-headline-md);
+  line-height: var(--line-height-headline-md);
+  text-align: center;
 }
 
 .testimonials {
@@ -803,40 +956,115 @@
 .footer {
   position: relative;
   z-index: 2;
-  margin-top: -42px;
-  border-radius: 48px 48px 0 0;
-  color: color-mix(in srgb, var(--color-on-primary) 82%, transparent);
+  margin-top: -64px;
+  border-radius: 64px 64px 0 0;
+  padding: 96px var(--space-margin-desktop) 48px;
+  color: var(--color-on-primary);
   background: var(--color-primary);
 }
 
 .footerShell {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  padding: 48px 0;
+  display: grid;
+  grid-template-columns: 1.2fr 0.75fr 1fr 0.75fr;
+  gap: 48px;
+  width: min(var(--container-max), 100%);
+  margin: 0 auto 64px;
 }
 
 .footerLogo {
+  display: inline-flex;
   padding: 6px 10px;
   border-radius: var(--radius-lg);
   background: var(--color-on-primary);
 }
 
-.footer p {
+.footerBrand p {
   max-width: 360px;
-  margin-top: 14px;
+  margin-top: 24px;
+  color: color-mix(in srgb, var(--color-on-primary) 80%, transparent);
   font-size: 0.9rem;
   line-height: 1.6;
 }
 
-.footer nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.footerColumn {
+  display: grid;
+  align-content: start;
   gap: 22px;
-  font-size: var(--font-size-label-md);
+}
+
+.footerColumn h4 {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1rem;
   font-weight: 700;
+  color: var(--color-on-primary);
+}
+
+.footerColumn nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: color-mix(in srgb, var(--color-on-primary) 78%, transparent);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.footerContactList {
+  display: grid;
+  gap: 14px;
+  padding: 0;
+  color: color-mix(in srgb, var(--color-on-primary) 78%, transparent);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  list-style: none;
+}
+
+.footerContactList li {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.footerContactList svg {
+  width: 16px;
+  height: 16px;
+}
+
+.footerSocials {
+  display: flex;
+  gap: 14px;
+}
+
+.footerSocials a {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--color-on-primary) 10%, transparent);
+}
+
+.footerSocials svg {
+  width: 19px;
+  height: 19px;
+}
+
+.footerBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: min(var(--container-max), 100%);
+  margin: 0 auto;
+  border-top: 1px solid color-mix(in srgb, var(--color-on-primary) 12%, transparent);
+  padding-top: 32px;
+  color: color-mix(in srgb, var(--color-on-primary) 62%, transparent);
+  font-size: 0.78rem;
+}
+
+.footerBottom nav {
+  display: flex;
+  gap: 24px;
 }
 
 .footer a:hover {
@@ -848,7 +1076,6 @@
   .navShell,
   .heroGrid,
   .appGrid,
-  .footerShell,
   .aboutContent {
     width: min(var(--container-max), calc(100% - (var(--space-margin-mobile) * 2)));
   }
@@ -888,11 +1115,25 @@
   }
 
   .bentoGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .bentoWide {
     grid-column: auto;
+  }
+
+  .footer {
+    padding-right: var(--space-margin-mobile);
+    padding-left: var(--space-margin-mobile);
+  }
+
+  .footerShell {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footerBottom {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 
@@ -913,6 +1154,7 @@
 
   .highlightGrid,
   .featureGrid,
+  .bentoGrid,
   .spaceGrid,
   .testimonialGrid {
     grid-template-columns: 1fr;
@@ -941,7 +1183,12 @@
   }
 
   .footerShell {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .footerBottom nav {
     flex-direction: column;
-    align-items: flex-start;
+    gap: 12px;
   }
 }

@@ -46,22 +46,30 @@ export const pedagogyItems = [
   {
     title: "Desenvolvimento socioemocional",
     text: "Empatia, autoconhecimento e resolução de pequenos conflitos com diálogo guiado.",
+    image:
+      "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=900&q=80",
     tone: "purple",
     featured: true,
   },
   {
     title: "Artes e criatividade",
     text: "Exploração de múltiplas linguagens artísticas no cotidiano escolar.",
+    image:
+      "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=900&q=80",
     tone: "teal",
   },
   {
     title: "Coordenação motora",
     text: "Circuitos, brincadeiras e atividades psicomotoras planejadas.",
+    image:
+      "https://images.unsplash.com/photo-1535572290543-960a8046f5af?auto=format&fit=crop&w=900&q=80",
     tone: "peach",
   },
   {
     title: "Contato com a natureza",
     text: "Horta escolar, exploração ao ar livre e consciência ambiental desde cedo.",
+    image:
+      "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=900&q=80",
     tone: "yellow",
     featured: true,
   },
