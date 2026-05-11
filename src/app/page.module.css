@@ -164,7 +164,7 @@
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 88px 0 170px;
+  padding: 64px 0 170px;
   background: linear-gradient(
     180deg,
     var(--color-surface-bright) 0%,
@@ -1144,7 +1144,7 @@
   }
 
   .hero {
-    padding-top: 56px;
+    padding-top: 48px;
   }
 
   .heroGrid,
